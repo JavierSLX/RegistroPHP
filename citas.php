@@ -33,6 +33,8 @@
                     $id = $arreglo[$i][0];
                     for($j = 0; $j < count($arreglo[$i]); $j++)
                         echo "<td>".$arreglo[$i][$j]."</td>";
+
+                    echo "</tr>";
                 }
             ?>
         </table>
