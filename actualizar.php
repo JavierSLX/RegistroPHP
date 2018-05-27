@@ -17,7 +17,7 @@
 
         $query = "DELETE FROM usuario WHERE id = $usuario_id";
         $bd->query($query);
-        alerta("Usuario eliminado", "modificarRegistro.php");
+        alerta("Usuario eliminado", "citas.php");
     }
     
     if (isset($_POST['modificar']))
