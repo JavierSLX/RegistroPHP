@@ -8,7 +8,7 @@
     FROM usuario";
     $usuarios = getConnect()->query($query);
 ?>
-
+<!DOCTYPE html>
 <html>
     <head>
         <title>Modificación</title>
@@ -76,6 +76,14 @@
             <div>
                 <input type="radio" name="genero" value="masculino" id="masculino" checked="true"><label for="masculino">Masculino</label>
                 <input type="radio" name="genero" value="femenino" id="femenino"><label for="femenino">Femenino</label>
+            </div>
+            <br/>
+            <div>Fecha(dd/mm/yyyy):
+                <input id="fecha" name="fecha" placeholder="Fecha" type="text" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"/>
+            </div>
+            <br/>
+            <div>Hora(hh:mm) 24hrs:
+                <input id="hora" name="hora" placeholder="hora" type="text" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$"/>
             </div>
             <br/>
             <div>Edad:

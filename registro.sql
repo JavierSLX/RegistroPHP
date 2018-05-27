@@ -2589,7 +2589,7 @@ CREATE TABLE anotacion
 (
 	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     fecha DATETIME NOT NULL DEFAULT now(),
-    mensaje VARCHAR(200) NOT NULL,
+    mensaje VARCHAR(200) NOT NULL DEFAULT 'S/R',
     usuario_id INT NOT NULL,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );

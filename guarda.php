@@ -17,6 +17,8 @@
     $telefono = $_POST['telefono'];
     $correo = $_POST['correo'];
     $mensaje = $_POST['mensaje']; 
+    $fecha = $_POST['fecha'];
+    $hora = $_POST['hora'];
 
     //Hace las validaciones
     if(empty($nombre) || empty($apellido_paterno) || empty($apellido_materno))
@@ -30,6 +32,9 @@
 
     if(empty($edad) || empty($telefono) || empty($correo))
         alerta("Llene los elementos complementarios", "index.php");
+
+    if(empty($fecha) || empty($hora))
+        alerta("Llene los datos de la cita", "index.php");
 
     //Registra en la BD
     $query = "INSERT INTO usuario(nombre, apellido_paterno, apellido_materno, direccion, edad, sexo, telefono, correo, municipio_id) VALUES 
@@ -45,14 +50,22 @@
     $usuario_id = $row['id'];
 
     //Inserta en anotacion
+    list($dia, $mes, $ano) = split('[/]', $fecha);
+    $fecha = $ano."-".$mes."-".$dia." ".$hora;
     if(!empty($mensaje))
     {
-        $query = "INSERT INTO anotacion(mensaje, usuario_id) VALUES ('$mensaje', $usuario_id)";
+        $query = "INSERT INTO anotacion(fecha, mensaje, usuario_id) 
+        VALUES ('$fecha', '$mensaje', $usuario_id)";
+        getConnect()->query($query);
+    }
+    else
+    {
+        $query = "INSERT INTO anotacion(fecha, usuario_id) 
+        VALUES ('$fecha', $usuario_id)";
         getConnect()->query($query);
     }
 
-    alerta("Usuario creado correctamente", "modificarRegistro.php");
-    mandarCorreo($nombre, $correo, "Confirme sus datos por favor");
+    alerta("Usuario creado correctamente", "citas.php");
 
     function mandarCorreo($nombre, $correo, $titulo)
     {
