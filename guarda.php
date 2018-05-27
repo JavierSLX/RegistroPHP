@@ -52,22 +52,30 @@
     }
 
     alerta("Usuario creado correctamente", "modificarRegistro.php");
-    mandarCorreo($nombre, $correo, $mensaje);
+    mandarCorreo($nombre, $correo, "Confirme sus datos por favor");
 
     function mandarCorreo($nombre, $correo, $titulo)
     {
-        /*Configuracion de variables para enviar el correo*/
-        $mail_username = "webmaster.atc.mx@gmail.com";//Correo electronico saliente
-        $mail_userpassword = "marquesada.466";//Tu contraseña de gmail
-        $mail_addAddress = $correo;//correo electronico que recibira el mensaje
-        $template = "email_template.html";//Ruta de la plantilla HTML para enviar nuestro mensaje
+        $cuerpo = '
+        <!DOCTYPE html>
+        <html>
+        <head>
+         <title></title>
+        </head>
+        <body>
+        Hola '.$nombre.'. Este es un mensaje de confirmación.
+        </body>
+        </html>';
         
-        /*Inicio captura de datos enviados por $_POST para enviar el correo */
-        $mail_setFromEmail = $mail_username;
-        $mail_setFromName = $name;
-        $txt_message = "Hola $name. Este es un correo de confirmación de su información";
-        $mail_subject = "Verifique su información";
+        //para el envío en formato HTML
+        $headers  = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+        //dirección del remitente
+        $headers .= "From: Administrador <php.correo.system@gmail.com>\r\n";
         
-        sendemail($mail_username, $mail_userpassword, $mail_setFromEmail, $mail_setFromName, $mail_addAddress, $txt_message, $mail_subject, $template);//Enviar el mensaje
+        //Una Dirección de respuesta, si queremos que sea distinta que la del remitente
+        $headers .= "Reply-To: php.correo.system@gmail.com\r\n";
+
+        mail($correo, $titulo, $cuerpo, $headers);
     }
 ?>

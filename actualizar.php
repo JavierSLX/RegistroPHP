@@ -49,8 +49,8 @@
 
         //Actualiza en la BD
         $query = "UPDATE usuario SET nombre = '$nombre', apellido_paterno = '$apellido_paterno', apellido_materno = '$apellido_materno',
-        direccion = '$direccion', edad = $edad, genero = '$genero', telefono = '$telefono', correo = '$correo', municipio_id = $municipio_id
-        WHERE id = $usuario_id";
+        direccion = '$direccion', edad = $edad, sexo = '$genero', telefono = '$telefono', correo = '$correo', municipio_id = $municipio_id
+         WHERE id = $usuario_id";
 
         $bd->query($query);
 
